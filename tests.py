@@ -28,6 +28,12 @@ class TestBooksCollector:
         collector4.set_book_genre('Предупреждение и зомби', 'Ужасы')
         assert collector4.books_genre ['Предупреждение и зомби'] == 'Ужасы'
 
+    def test_get_book_genre(self):
+        collector12 = BooksCollector()
+        collector12.add_new_book('Шерлок Холмс')
+        collector12.set_book_genre('Шерлок Холмс', 'Детективы')
+        assert collector12.get_book_genre('Шерлок Холмс') == 'Детективы'
+
     @pytest.mark.parametrize('name, genre', [['Предупреждение и зомби', 'Роман'], ['', 'Мульфильмы']])
     def test_set_book_invalid_genre(self, name, genre):
         collector5 = BooksCollector()
@@ -43,6 +49,12 @@ class TestBooksCollector:
         collector7.set_book_genre('Автостопом по галактике', 'Фантастика')
         books = collector7.get_books_with_specific_genre('Фантастика')
         assert "Автостопом по галактике" in books
+
+    def test_get_books_genre(self):
+        collector11 = BooksCollector()
+        collector11.add_new_book('Колобок')
+        collector11.set_book_genre('Колобок', 'Ужасы')
+        assert collector11.get_books_genre() == {'Колобок': 'Ужасы'}
 
     def test_get_books_for_children(self):
         collector8 = BooksCollector()
@@ -76,6 +88,13 @@ class TestBooksCollector:
         collector10.add_book_in_favorites('Холодное сердце')
         collector10.delete_book_from_favorites('Холодное сердце')
         assert 'Холодное сердце' not in collector10.get_list_of_favorites_books()
+
+    def test_get_list_of_favorites_books(self):
+        collector13 = BooksCollector()
+        collector13.add_new_book('Властелин Колец')
+        collector13.add_new_book('Гарри Поттер')
+        collector13.add_book_in_favorites('Гарри Поттер')
+        assert collector13.get_list_of_favorites_books() == ['Гарри Поттер']
 
 
 
